@@ -5,13 +5,16 @@ from blessed import Terminal
 from threading import Lock
 from typing import List
 
+from .composer import Widget
 
-class StatusBuffer:
+
+class StatusBuffer(Widget):
 
     BEHAVIOR_TOP = 1
     BEHAVIOR_BOTTOM = 2
 
     def __init__(self, term: Terminal):
+        super().__init__()
         self.top_status = []
         self.bottom_status = []
         self.buffer = []
@@ -21,8 +24,8 @@ class StatusBuffer:
 
         self.draw_offset = 0
 
-    
-    def refresh(self):
+
+    def render(self):
 
         self.draw_offset = 0
         self.lock.acquire()
